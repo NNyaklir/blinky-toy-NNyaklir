@@ -35,6 +35,8 @@ void main(void){
         int b3STATE =(BIT5 & SW3) ? 1 : 0;
         int b4STATE =(BIT6 & SW4) ? 1 : 0;
 
+
+        //@TODO implement buzzer to make noise when button is pressed
         switch (currentState){
             case STATE_OFF:
                 if(b1STATE){
