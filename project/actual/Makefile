@@ -18,3 +18,5 @@ load: blinkyToy.elf
 
 clean:
 	rm -f *.o *.elf
+
+led.o: led.h
