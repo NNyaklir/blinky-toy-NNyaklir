@@ -2,6 +2,9 @@
 #include "led.h"
 //#include "switches.h"
 
+
+char switch_state_changed, switch_state_down;
+
 void led_init()
 {
   P1DIR |= LEDS;		// bits attached to leds are output
