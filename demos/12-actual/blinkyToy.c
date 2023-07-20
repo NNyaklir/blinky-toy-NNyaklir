@@ -45,12 +45,12 @@ void main(void){
                 if(b1STATE){
                     currentState=LED_GREEN_ON;  
                     P1OUT ^= BIT6;
-                    greenState = !greenState
+                    greenState = !greenState;s
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
                     P1OUT ^= BIT0;
-                    redState = !redState
+                    redState = !redState;
                 }
                 break;
             case LED_GREEN_ON:
