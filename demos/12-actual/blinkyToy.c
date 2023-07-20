@@ -32,6 +32,11 @@ void main(void){
     P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
     P1OUT &= ~LEDS; //LEDs initially off
 
+    // Check the initial state of the LEDs
+    greenState = (P1OUT & LED_GREEN) ? 1 : 0;
+    redState = (P1OUT & LED_RED) ? 1 : 0;
+
+    
     while(1){
 
         int b1STATE =(P2IN & SW1) ? 1 : 0;
