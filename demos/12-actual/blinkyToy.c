@@ -70,7 +70,7 @@ void main(void){
                 break;
             case LED_RED_ON:
                 redState=1;
-                P1OUT ^=Bit0;
+                P1OUT ^=BIT0;
                 greenState=0;
                 P1OUT &= ~BIT6;
                 if(b1STATE){
