@@ -15,6 +15,9 @@ typedef enum{
     STATE_OFF,LED_GREEN_ON,LED_RED_ON,BOTH_LED_ON
 }State;
 
+    int greenState =0;
+    int redState = 0;
+
     State currentState= STATE_OFF;
 
 void main(void){
@@ -41,41 +44,45 @@ void main(void){
             case STATE_OFF:
                 if(b1STATE){
                     currentState=LED_GREEN_ON;  
-                    P1OUT |= BIT6;
+                    P1OUT ^= BIT6;
+                    greenState = !greenState
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
-                    P1OUT |= BIT0;
+                    P1OUT ^= BIT0;
+                    redState = !redState
                 }
                 break;
             case LED_GREEN_ON:
                 if(b3STATE){
                     currentState=STATE_OFF;
-                    P1OUT &= ~BIT6;
+                    
                 }
                 else if(b2STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT |= BIT0;
+                    P1OUT ^= BIT0;
+                    redState= !redState;
                 }
                 break;
             case LED_RED_ON:
                 if(b1STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT |= BIT6;
+                    P1OUT ^= BIT6;
+                    greenState= !greenState;
                 }
                 if(b4STATE){
                     currentState=STATE_OFF;
-                    P1OUT &=  ~BIT0;
+                    
                 }
                 break;
             case BOTH_LED_ON:
                 if(b3STATE){
                     currentState=LED_RED_ON;
-                    P1OUT &= ~BIT6;
+                    
                 }
                 else if(b4STATE){
                     currentState=LED_GREEN_ON;
-                    P1OUT &= ~BIT0;
+                    
                 }
                 break;
         }
