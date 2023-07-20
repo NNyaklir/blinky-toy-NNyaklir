@@ -43,32 +43,39 @@ void main(void){
         //@TODO implement buzzer to make noise when button is pressed
         switch (currentState){
             case STATE_OFF:
+                P1OUT &= ~LEDS;
+                greenState=0;
+                redState=0;
                 if(b1STATE){
                     currentState=LED_GREEN_ON;  
-                    P1OUT ^= BIT6;
-                    greenState = !greenState;
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
-                    P1OUT ^= BIT0;
-                    redState = !redState;
+                    
                 }
                 break;
             case LED_GREEN_ON:
+                greenState =1;
+                P1OUT ^= BIT6;
+                redState=0;
+                P1OUT &= ~BIT0;
                 if(b3STATE){
                     currentState=STATE_OFF;
                     
                 }
                 else if(b2STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT ^= BIT0;
-                    redState= !redState;
+                    
                 }
                 break;
             case LED_RED_ON:
+                redState=1;
+                P1OUT ^=Bit0;
+                greenState=0;
+                P1OUT &= ~BIT6;
                 if(b1STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT ^= BIT6;
+                   
                     greenState= !greenState;
                 }
                 if(b4STATE){
@@ -77,6 +84,7 @@ void main(void){
                 }
                 break;
             case BOTH_LED_ON:
+                P1OUT ^= LEDS;
                 if(b3STATE){
                     currentState=LED_RED_ON;
                     
