@@ -23,8 +23,8 @@ void main(void){
     
     // Set button pins as inputs with pull-up resistors enabled
     P2DIR &=~(SW1|SW2|SW3|SW4);
-    P2REN = SW1|SW2|SW3|SW4;
-    P2OUT = SW1|SW2|SW3|SW4;
+    P2REN = (SW1|SW2|SW3|SW4);
+    P2OUT = (SW1|SW2|SW3|SW4);
 
     P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
 
