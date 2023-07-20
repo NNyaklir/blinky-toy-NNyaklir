@@ -30,10 +30,10 @@ void main(void){
 
     while(1){
 
-        int b1STATE =(BIT3 & SW1) ? 1 : 0;
-        int b2STATE =(BIT4 & SW2) ? 1 : 0;
-        int b3STATE =(BIT5 & SW3) ? 1 : 0;
-        int b4STATE =(BIT6 & SW4) ? 1 : 0;
+        int b1STATE =(P2IN & SW1) ? 1 : 0;
+        int b2STATE =(P2IN & SW2) ? 1 : 0;
+        int b3STATE =(P2IN & SW3) ? 1 : 0;
+        int b4STATE =(P2IN & SW4) ? 1 : 0;
 
 
         //@TODO implement buzzer to make noise when button is pressed
