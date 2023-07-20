@@ -45,7 +45,7 @@ void main(void){
                 if(b1STATE){
                     currentState=LED_GREEN_ON;  
                     P1OUT ^= BIT6;
-                    greenState = !greenState;s
+                    greenState = !greenState;
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
