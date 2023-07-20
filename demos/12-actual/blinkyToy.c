@@ -30,6 +30,7 @@ void main(void){
     P2OUT |= SW1|SW2|SW3|SW4;
 
     P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
+    P1OUT &= ~LEDS; //LEDs initially off
 
     while(1){
 
