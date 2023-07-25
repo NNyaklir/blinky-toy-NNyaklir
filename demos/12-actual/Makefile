@@ -11,11 +11,13 @@ AS              = msp430-elf-as
 all: blinkyToy.elf
 
 blinkyToy.elf: ${COMMON_OBJECTS}    
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a buzzer.o led.o
 
 load: blinkyToy.elf
 	msp430loader.sh blinkyToy.elf
 
-clean:
+clean: $^
 	rm -f *.o *.elf
 
+led.c: led.h
+buzzer.c: buzzer.h

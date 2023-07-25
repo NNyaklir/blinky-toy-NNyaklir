@@ -2,6 +2,8 @@
 #include "libTimer.h"
 #include "led.h"
 #include "led.c"
+#include "buzzer.h"
+#include "buzzer.c"
 
 #define SW1 BIT0		
 #define SW2 BIT1
@@ -22,7 +24,8 @@ typedef enum{
 
 void main(void){
     configureClocks();
-    
+    buzzer_init();
+    led_init();
     
     // Set button pins as inputs with pull-up resistors enabled
     P2DIR &= ~(SW1|SW2|SW3|SW4);
@@ -52,22 +55,27 @@ void main(void){
                     currentState=LED_GREEN_ON;  
                     P1OUT ^= BIT6;
                     greenState = !greenState;
+                    buzzer_play_for_duration(500);
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
                     P1OUT ^= BIT0;
                     redState = !redState;
+                    buzzer_play_for_duration(500);
+
                 }
                 break;
             case LED_GREEN_ON:
                 if(b3STATE){
                     currentState=STATE_OFF;
+                    buzzer_play_for_duration(500);
                     
                 }
                 else if(b2STATE){
                     currentState=BOTH_LED_ON;
                     P1OUT ^= BIT0;
                     redState= !redState;
+                    buzzer_play_for_duration(500);
                 }
                 break;
             case LED_RED_ON:
@@ -75,19 +83,23 @@ void main(void){
                     currentState=BOTH_LED_ON;
                     P1OUT ^= BIT6;
                     greenState= !greenState;
+                    buzzer_play_for_duration(500);
                 }
                 if(b4STATE){
                     currentState=STATE_OFF;
+                    buzzer_play_for_duration(500);
                     
                 }
                 break;
             case BOTH_LED_ON:
                 if(b3STATE){
                     currentState=LED_RED_ON;
+                    buzzer_play_for_duration(500);
                     
                 }
                 else if(b4STATE){
                     currentState=LED_GREEN_ON;
+                    buzzer_play_for_duration(500);
                     
                 }
                 break;

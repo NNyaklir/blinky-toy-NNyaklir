@@ -5,12 +5,12 @@
 
 char switch_state_changed, switch_state_down;
 
-/*void led_init()
+void led_init()
 {
   P1DIR |= LEDS;		// bits attached to leds are output
   switch_state_changed = 1;
   led_update();
-} */
+} 
 
 /*
 void led_update(){
