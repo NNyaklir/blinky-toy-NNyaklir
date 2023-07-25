@@ -1,5 +1,5 @@
 # makfile configuration
-COMMON_OBJECTS  = blinkyToy.o led.o buzzer.o
+COMMON_OBJECTS  = blinkyToy.o
 CPU             = msp430g2553
 CFLAGS          = -mmcu=${CPU} -I../h
 LDFLAGS		= -L/opt/ti/msp430_gcc/include
