@@ -51,7 +51,7 @@ int main(void) {
             currentState = LED_GREEN_ON;
             led_on(LED_GREEN);
             greenState = !greenState;
-            buzzer_play_for_duration(5);
+            buzzer_play_for_duration(1);
         }
 
         // Check for button 2 press
@@ -59,7 +59,7 @@ int main(void) {
             currentState = LED_RED_ON;
             led_on(LED_RED);
             redState = !redState;
-            buzzer_play_for_duration(5);
+            buzzer_play_for_duration(1);
         }
 
         // Check for button 3 press
@@ -71,7 +71,7 @@ int main(void) {
                 currentState = LED_RED_ON;
                 led_off(LED_GREEN);
             }
-            buzzer_play_for_duration(5);
+            buzzer_play_for_duration(1);
         }
 
         // Check for button 4 press
@@ -83,7 +83,7 @@ int main(void) {
                 currentState = LED_GREEN_ON;
                 led_off(LED_RED);
             }
-            buzzer_play_for_duration(5);
+            buzzer_play_for_duration(1);
         }
 
         // Update the previous button states
