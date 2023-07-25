@@ -32,8 +32,8 @@ void main(void){
     P2REN |= SW1|SW2|SW3|SW4;
     P2OUT |= SW1|SW2|SW3|SW4;
 
-    P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
-    P1OUT &= ~LEDS; //LEDs initially off
+    //P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
+    //P1OUT &= ~LEDS; //LEDs initially off
 
     // Check the initial state of the LEDs
     greenState = (P1OUT & LED_GREEN) ? 1 : 0;

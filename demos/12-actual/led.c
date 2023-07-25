@@ -12,7 +12,7 @@ void led_init()
   led_update();
 } 
 
-/*
+
 void led_update(){
   if (switch_state_changed) {
     char ledFlags = 0; //by default, no LEDs on 
@@ -24,5 +24,5 @@ void led_update(){
     P1OUT |= ledFlags;         // set bits for on leds
   }
   switch_state_changed = 0;
-} */
+} 
 
