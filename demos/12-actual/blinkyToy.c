@@ -20,91 +20,78 @@ typedef enum{
 
     State currentState= STATE_OFF;
 
-void main(void){
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD; // Stop watchdog timer
+
     configureClocks();
     buzzer_init();
     led_init();
-    
-    // Set button pins as inputs with pull-up resistors enabled
-    P2DIR &= ~(SW1|SW2|SW3|SW4);
-    P2REN |= SW1|SW2|SW3|SW4;
-    P2OUT |= SW1|SW2|SW3|SW4;
 
-    //P1DIR |= LED_GREEN | LED_RED;  //led pins as out puts
-    //P1OUT &= ~LEDS; //LEDs initially off
+    // Turn off both LEDs initially
+    led_off(LED_GREEN);
+    led_off(LED_RED);
 
-    // Check the initial state of the LEDs
-    greenState = (P1OUT & LED_GREEN) ? 1 : 0;
-    redState = (P1OUT & LED_RED) ? 1 : 0;
+    while (1) {
+        int b1STATE = (P2IN & SW1) ? 1 : 0;
+        int b2STATE = (P2IN & SW2) ? 1 : 0;
+        int b3STATE = (P2IN & SW3) ? 1 : 0;
+        int b4STATE = (P2IN & SW4) ? 1 : 0;
 
-    
-    while(1){
-
-        int b1STATE =(P2IN & SW1) ? 1 : 0;
-        int b2STATE =(P2IN & SW2) ? 1 : 0;
-        int b3STATE =(P2IN & SW3) ? 1 : 0;
-        int b4STATE =(P2IN & SW4) ? 1 : 0;
-
-
-        //@TODO implement buzzer to make noise when button is pressed
-        switch (currentState){
+        switch (currentState) {
             case STATE_OFF:
-                if(b1STATE){
-                    currentState=LED_GREEN_ON;  
+                if (b1STATE) {
+                    currentState = LED_GREEN_ON;
                     led_on(LED_GREEN);
                     greenState = !greenState;
                     buzzer_play_for_duration(5);
-                }
-                else if(b2STATE){
-                    currentState=LED_RED_ON;
+                } else if (b2STATE) {
+                    currentState = LED_RED_ON;
                     led_on(LED_RED);
                     redState = !redState;
                     buzzer_play_for_duration(5);
-
                 }
                 break;
             case LED_GREEN_ON:
-                if(b3STATE){
-                    currentState=STATE_OFF;
+                if (b3STATE) {
+                    currentState = STATE_OFF;
                     led_off(LED_GREEN);
                     buzzer_play_for_duration(5);
-                    
-                }
-                else if(b2STATE){
-                    currentState=BOTH_LED_ON;
+                } else if (b2STATE) {
+                    currentState = BOTH_LED_ON;
                     led_on(LED_RED);
-                    redState= !redState;
+                    redState = !redState;
                     buzzer_play_for_duration(5);
                 }
                 break;
             case LED_RED_ON:
-                if(b1STATE){
-                    currentState=BOTH_LED_ON;
+                if (b1STATE) {
+                    currentState = BOTH_LED_ON;
                     led_on(LED_GREEN);
-                    greenState= !greenState;
+                    greenState = !greenState;
                     buzzer_play_for_duration(5);
                 }
-                if(b4STATE){
-                    currentState=STATE_OFF;
+                if (b4STATE) {
+                    currentState = STATE_OFF;
                     led_off(LED_RED);
                     buzzer_play_for_duration(5);
-                    
                 }
                 break;
             case BOTH_LED_ON:
-                if(b3STATE){
-                    currentState=LED_RED_ON;
+                if (b3STATE) {
+                    currentState = LED_RED_ON;
                     led_off(LED_GREEN);
                     buzzer_play_for_duration(5);
-                    
-                }
-                else if(b4STATE){
-                    currentState=LED_GREEN_ON;
+                } else if (b4STATE) {
+                    currentState = LED_GREEN_ON;
                     led_off(LED_RED);
                     buzzer_play_for_duration(5);
-                    
                 }
                 break;
         }
+
+        // Add a delay to avoid button bounce issues
+        __delay_cycles(200000);
     }
+
+    return 0;
 }
