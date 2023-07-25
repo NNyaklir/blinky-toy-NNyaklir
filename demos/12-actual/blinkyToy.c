@@ -53,13 +53,13 @@ void main(void){
                     currentState=LED_GREEN_ON;  
                     led_on(LED_GREEN);
                     greenState = !greenState;
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
                     led_on(LED_RED);
                     redState = !redState;
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
 
                 }
                 break;
@@ -67,14 +67,14 @@ void main(void){
                 if(b3STATE){
                     currentState=STATE_OFF;
                     led_off(LED_GREEN);
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                     
                 }
                 else if(b2STATE){
                     currentState=BOTH_LED_ON;
                     led_on(LED_RED);
                     redState= !redState;
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                 }
                 break;
             case LED_RED_ON:
@@ -82,12 +82,12 @@ void main(void){
                     currentState=BOTH_LED_ON;
                     led_on(LED_GREEN);
                     greenState= !greenState;
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                 }
                 if(b4STATE){
                     currentState=STATE_OFF;
                     led_off(LED_RED);
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                     
                 }
                 break;
@@ -95,13 +95,13 @@ void main(void){
                 if(b3STATE){
                     currentState=LED_RED_ON;
                     led_off(LED_GREEN);
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                     
                 }
                 else if(b4STATE){
                     currentState=LED_GREEN_ON;
                     led_off(LED_RED);
-                    buzzer_play_for_duration(500);
+                    buzzer_play_for_duration(5);
                     
                 }
                 break;
