@@ -1,9 +1,7 @@
 #include <msp430.h>
 #include "libTimer.h"
 #include "led.h"
-#include "led.c"
 #include "buzzer.h"
-#include "buzzer.c"
 
 #define SW1 BIT0		
 #define SW2 BIT1
