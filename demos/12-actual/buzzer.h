@@ -3,7 +3,7 @@
 
 void buzzer_init();
 void buzzer_set_period(short cycles);
-void buzzer_play_for_duration(unsigned int duration_ms);
+void buzzer_play_for_duration(unsigned int duration);
 
 
 #endif // included

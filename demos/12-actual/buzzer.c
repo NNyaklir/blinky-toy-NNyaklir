@@ -24,21 +24,27 @@ void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k resu
   CCR1 = cycles >> 1;		/* one half cycle */
 }
 
-void buzzer_play_for_duration(unsigned int duration_ms) {
+static volatile unsigned int duration_ms = 0;
+
+void buzzer_play_for_duration(unsigned int duration) {
     // Calculate the number of cycles required for the given duration
-    unsigned int cycles = duration_ms * 2; // Assuming buzzer clock = 2MHz
+    unsigned int cycles = duration * 2000; // Assuming buzzer clock = 2MHz
 
     // Set the buzzer to the desired frequency for the specified duration
     buzzer_set_period(cycles);
 
-    // Wait for the specified duration
-    __delay_cycles(duration_ms * 2000); // Delay for duration_ms milliseconds
-
-    // Turn off the buzzer after the specified duration
-    buzzer_set_period(0);
+    // Store the duration for the timer interrupt to use
+    duration_ms = duration;
 }
 
-
+// Timer interrupt handler for buzzer duration
+void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer_A0_ISR(void) {
+    if (duration_ms > 0) {
+        duration_ms--;
+    } else {
+        buzzer_set_period(0); // Turn off the buzzer
+    }
+}
     
     
   
