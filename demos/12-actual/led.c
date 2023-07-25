@@ -1,28 +1,32 @@
 #include <msp430.h>
 #include "led.h"
-//#include "switches.h"
 
 
-char switch_state_changed, switch_state_down;
+// LED pin assignments
+#define LED_GREEN BIT6
+#define LED_RED BIT0
 
-void led_init()
-{
-  P1DIR |= LEDS;		// bits attached to leds are output
-  switch_state_changed = 1;
-  led_update();
-} 
+// Function to initialize the LEDs
+void led_init() {
+    // Set LED pins as outputs
+    P1DIR |= LED_GREEN | LED_RED;
 
+    // Turn off both LEDs initially
+    led_off(LED_GREEN);
+    led_off(LED_RED);
+}
 
-void led_update(){
-  if (switch_state_changed) {
-    char ledFlags = 0; //by default, no LEDs on 
+// Function to turn on the LED
+void led_on(unsigned int led) {
+    P1OUT |= led;
+}
 
-    ledFlags |= switch_state_down ? LED_GREEN : 0;
-    ledFlags |= switch_state_down ? 0 : LED_RED;
+// Function to turn off the LED
+void led_off(unsigned int led) {
+    P1OUT &= ~led;
+}
 
-    P1OUT &= (0xff - LEDS) | ledFlags; // clear bits for off leds
-    P1OUT |= ledFlags;         // set bits for on leds
-  }
-  switch_state_changed = 0;
-} 
-
+// Function to toggle the LED state
+void led_toggle(unsigned int led) {
+    P1OUT ^= led;
+}

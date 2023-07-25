@@ -53,13 +53,13 @@ void main(void){
             case STATE_OFF:
                 if(b1STATE){
                     currentState=LED_GREEN_ON;  
-                    P1OUT ^= BIT6;
+                    led_on(LED_GREEN);
                     greenState = !greenState;
                     buzzer_play_for_duration(500);
                 }
                 else if(b2STATE){
                     currentState=LED_RED_ON;
-                    P1OUT ^= BIT0;
+                    led_on(LED_RED);
                     redState = !redState;
                     buzzer_play_for_duration(500);
 
@@ -68,12 +68,13 @@ void main(void){
             case LED_GREEN_ON:
                 if(b3STATE){
                     currentState=STATE_OFF;
+                    led_off(LED_GREEN);
                     buzzer_play_for_duration(500);
                     
                 }
                 else if(b2STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT ^= BIT0;
+                    led_on(LED_RED);
                     redState= !redState;
                     buzzer_play_for_duration(500);
                 }
@@ -81,12 +82,13 @@ void main(void){
             case LED_RED_ON:
                 if(b1STATE){
                     currentState=BOTH_LED_ON;
-                    P1OUT ^= BIT6;
+                    led_on(LED_GREEN);
                     greenState= !greenState;
                     buzzer_play_for_duration(500);
                 }
                 if(b4STATE){
                     currentState=STATE_OFF;
+                    led_off(LED_RED);
                     buzzer_play_for_duration(500);
                     
                 }
@@ -94,11 +96,13 @@ void main(void){
             case BOTH_LED_ON:
                 if(b3STATE){
                     currentState=LED_RED_ON;
+                    led_off(LED_GREEN);
                     buzzer_play_for_duration(500);
                     
                 }
                 else if(b4STATE){
                     currentState=LED_GREEN_ON;
+                    led_off(LED_RED);
                     buzzer_play_for_duration(500);
                     
                 }

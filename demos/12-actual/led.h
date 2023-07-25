@@ -8,10 +8,11 @@
 #define LEDS (BIT0 | BIT6)
 
 
-void led_init();		/* initialize LEDs */
-void led_update();		/* update leds */
+// Function prototypes
+void led_init();
+void led_on(unsigned int led);
+void led_off(unsigned int led);
+void led_toggle(unsigned int led);
 
-// these are boolean flags
-extern unsigned char leds_changed, green_led_state, red_led_state;
 
 #endif
